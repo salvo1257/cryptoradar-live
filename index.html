@@ -3,7 +3,7 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <title>CryptoRadar LIVE v1</title>
+  <title>CryptoRadar LIVE v1.2</title>
   <style>
     body { font-family: Arial; background: #0d0d0d; color: #0ff; padding: 20px; }
     .section { background: #1a1a1a; padding: 15px; margin-bottom: 20px; border-radius: 10px; }
@@ -26,8 +26,10 @@
 
         // Supporti/Resistenze LIVE
         supportBox.innerHTML = `
-          🔴 Resistenza (4H): $${(price * 1.03).toFixed(2)} (+3.0%)<br>
-          🟢 Supporto (1D): $${(price * 0.97).toFixed(2)} (-3.0%)
+          🔴 Resistenza 1 (4H): $${(price * 1.03).toFixed(2)} | +3.0%<br>
+          🔴 Resistenza 2 (1D): $${(price * 1.05).toFixed(2)} | +5.0%<br>
+          🟢 Supporto 1 (4H): $${(price * 0.97).toFixed(2)} | -3.0%<br>
+          🟢 Supporto 2 (1D): $${(price * 0.95).toFixed(2)} | -5.0%
         `;
 
         // Whale Alert LIVE
@@ -52,7 +54,7 @@
 <body>
   <div class="data-status" id="status">🟡 Caricamento dati...</div>
 
-  <h1>CryptoRadar LIVE v1.0</h1>
+  <h1>CryptoRadar LIVE v1.2</h1>
 
   <div class="section">
     <h2>📊 Prezzo BTC</h2>
