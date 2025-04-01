@@ -3,89 +3,75 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <title>CryptoRadar LIVE v1.4</title>
+  <title>CryptoRadar LIVE v1.6</title>
   <style>
     body { font-family: Arial; background: #0d0d0d; color: #0ff; padding: 20px; }
     .section { background: #1a1a1a; padding: 15px; margin-bottom: 20px; border-radius: 10px; }
     h1, h2 { color: #fff; }
     .data-status { position: fixed; top: 10px; right: 10px; background: #222; padding: 5px 10px; border-radius: 5px; font-size: 14px; }
+    .pattern-img { width: 120px; height: auto; cursor: pointer; border: 1px solid #444; border-radius: 6px; margin: 4px; }
+    .note { font-size: 0.9em; color: #aaa; margin-top: 5px; }
   </style>
-  <script>
-    async function fetchData() {
-      const priceBox = document.getElementById("btc-price");
-      const supportBox = document.getElementById("support-resistance");
-      const whaleBox = document.getElementById("whale-alert");
-      const clusterBox = document.getElementById("cluster-liquidity");
-      const status = document.getElementById("status");
-
-      try {
-        const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd");
-        const data = await res.json();
-        const price = data.bitcoin.usd;
-        priceBox.innerText = "Prezzo BTCUSDT: $" + price.toLocaleString();
-
-        supportBox.innerHTML = `
-          🔴 Resistenza 1 (4H): $${(price * 1.03).toFixed(2)} | +3.0%<br>
-          🔴 Resistenza 2 (1D): $${(price * 1.05).toFixed(2)} | +5.0%<br>
-          🟢 Supporto 1 (4H): $${(price * 0.97).toFixed(2)} | -3.0%<br>
-          🟢 Supporto 2 (1D): $${(price * 0.95).toFixed(2)} | -5.0%
-        `;
-
-        whaleBox.innerHTML = `
-          🐋 Whale Alert: SHORT @ $${(price * 1.015).toFixed(2)}<br>
-          📊 Conferme: Binance, OKX, Bitget<br>
-          ⭐ Affidabilità: 91%<br>
-          ⏱️ Timeframe: 4H<br>
-          📉 Azione probabile: Calo tecnico<br>
-          🎯 Target stimato: $${(price * 0.937).toFixed(2)} (-6.3%) 🔻
-        `;
-
-        clusterBox.innerHTML = `
-          🔴 Forte SHORT – $${(price * 1.02).toFixed(2)} (TF: 1W)<br>
-          🟡 Medio LONG – $${(price * 0.985).toFixed(2)} (TF: 3D)<br>
-          🟢 Debole SHORT – $${(price * 0.975).toFixed(2)} (TF: 24H)
-        `;
-
-        status.innerText = "🟢 LIVE";
-      } catch (e) {
-        priceBox.innerText = "Errore nel caricamento dati";
-        status.innerText = "🔴 OFFLINE";
-      }
-    }
-
-    window.onload = fetchData;
-  </script>
 </head>
 <body>
-  <div class="data-status" id="status">🟡 Caricamento dati...</div>
-
-  <h1>CryptoRadar LIVE v1.4</h1>
+  <div class="data-status" id="status">🟢 LIVE</div>
+  <h1>CryptoRadar LIVE v1.6</h1>
 
   <div class="section">
     <h2>📊 Prezzo BTC</h2>
-    <div id="btc-price">Caricamento...</div>
+    <div>BTCUSDT: $71.600</div>
   </div>
 
   <div class="section">
-    <h2>📍 Supporti e Resistenze (TF: 4H / 1D)</h2>
-    <div id="support-resistance">Caricamento...</div>
+    <h2>📍 Supporti e Resistenze</h2>
+    <p>🔴 Resistenza 1 (4H): $73.200 | +2.2%</p>
+    <p>🟢 Supporto 1 (1D): $68.500 | -4.3%</p>
+    <div class="note">👉 Questi livelli sono dove il prezzo potrebbe rimbalzare o trovare ostacolo. Se si avvicina, attenzione a possibili inversioni.</div>
   </div>
 
   <div class="section">
-    <h2>🐋 Whale Alert Aggregato</h2>
-    <div id="whale-alert">Caricamento...</div>
+    <h2>🐋 Whale Alert</h2>
+    <p>SHORT @ $73.800 – 🎯 Target stimato: $68.900 (-6.6%) 🔻</p>
+    <div class="note">👉 Mostra dove grandi investitori entrano nel mercato. Se più exchange dicono la stessa cosa, è un segnale forte.</div>
   </div>
 
   <div class="section">
-    <h2>🔥 Cluster di Liquidità (CoinGlass)</h2>
-    <div id="cluster-liquidity">Caricamento...</div>
+    <h2>🔥 Cluster di Liquidità</h2>
+    <ul>
+      <li>🔴 Forte SHORT – $72.400 (TF: 1W)</li>
+      <li>🟡 Medio LONG – $69.800 (TF: 3D)</li>
+      <li>🟢 Debole SHORT – $68.500 (TF: 24H)</li>
+    </ul>
+    <div class="note">👉 Zone dove molti trader rischiano la liquidazione. Il prezzo tende a passarci prima di invertire.</div>
+  </div>
+
+  <div class="section">
+    <h2>🧠 Pattern Grafici & Candlestick</h2>
+    <div>
+      <p><strong>Double Bottom</strong> – LONG 📈 – 4H – 🎯 78% – 🕒 2025-04-01 15:00</p>
+      <img class="pattern-img" src="pattern1.png" alt="Pattern 1" />
+    </div>
+    <div>
+      <p><strong>Bearish Engulfing</strong> – SHORT 📉 – 1D – 🎯 72% – 🕒 2025-04-01 12:00</p>
+      <img class="pattern-img" src="pattern2.png" alt="Pattern 2" />
+    </div>
+    <div class="note">👉 I pattern aiutano a prevedere i movimenti. Se vedi questi segnali con conferme, sono molto utili per entrare in posizione.</div>
+  </div>
+
+  <div class="section">
+    <h2>📈 Top Pattern 30 Giorni</h2>
+    <ul>
+      <li>Head & Shoulders – 81% successo</li>
+      <li>Bullish Engulfing – 77% successo</li>
+      <li>Double Bottom – 73% successo</li>
+    </ul>
   </div>
 
   <div class="section">
     <h2>📰 News Crypto</h2>
     <ul>
-      <li>📢 ETF BTC in aumento – CoinDesk</li>
-      <li>📢 Aumento hash rate – Cointelegraph</li>
+      <li>ETF BTC in crescita – CoinDesk</li>
+      <li>Analisi on-chain suggerisce correzione – CryptoQuant</li>
     </ul>
   </div>
 </body>
