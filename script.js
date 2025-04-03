@@ -1,0 +1,1 @@
+// Qui andrà la logica completa con fetch API reali e visualizzazioni live

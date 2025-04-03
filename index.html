@@ -1,92 +1,16 @@
 
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>CryptoRadar LIVE v1.4</title>
-  <style>
-    body { font-family: Arial; background: #0d0d0d; color: #0ff; padding: 20px; }
-    .section { background: #1a1a1a; padding: 15px; margin-bottom: 20px; border-radius: 10px; }
-    h1, h2 { color: #fff; }
-    .data-status { position: fixed; top: 10px; right: 10px; background: #222; padding: 5px 10px; border-radius: 5px; font-size: 14px; }
-  </style>
-  <script>
-    async function fetchData() {
-      const priceBox = document.getElementById("btc-price");
-      const supportBox = document.getElementById("support-resistance");
-      const whaleBox = document.getElementById("whale-alert");
-      const clusterBox = document.getElementById("cluster-liquidity");
-      const status = document.getElementById("status");
-
-      try {
-        const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd");
-        const data = await res.json();
-        const price = data.bitcoin.usd;
-        priceBox.innerText = "Prezzo BTCUSDT: $" + price.toLocaleString();
-
-        supportBox.innerHTML = `
-          🔴 Resistenza 1 (4H): $${(price * 1.03).toFixed(2)} | +3.0%<br>
-          🔴 Resistenza 2 (1D): $${(price * 1.05).toFixed(2)} | +5.0%<br>
-          🟢 Supporto 1 (4H): $${(price * 0.97).toFixed(2)} | -3.0%<br>
-          🟢 Supporto 2 (1D): $${(price * 0.95).toFixed(2)} | -5.0%
-        `;
-
-        whaleBox.innerHTML = `
-          🐋 Whale Alert: SHORT @ $${(price * 1.015).toFixed(2)}<br>
-          📊 Conferme: Binance, OKX, Bitget<br>
-          ⭐ Affidabilità: 91%<br>
-          ⏱️ Timeframe: 4H<br>
-          📉 Azione probabile: Calo tecnico<br>
-          🎯 Target stimato: $${(price * 0.937).toFixed(2)} (-6.3%) 🔻
-        `;
-
-        clusterBox.innerHTML = `
-          🔴 Forte SHORT – $${(price * 1.02).toFixed(2)} (TF: 1W)<br>
-          🟡 Medio LONG – $${(price * 0.985).toFixed(2)} (TF: 3D)<br>
-          🟢 Debole SHORT – $${(price * 0.975).toFixed(2)} (TF: 24H)
-        `;
-
-        status.innerText = "🟢 LIVE";
-      } catch (e) {
-        priceBox.innerText = "Errore nel caricamento dati";
-        status.innerText = "🔴 OFFLINE";
-      }
-    }
-
-    window.onload = fetchData;
-  </script>
+  <meta charset="UTF-8">
+  <title>CryptoRadar v1.6 FINAL</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="data-status" id="status">🟡 Caricamento dati...</div>
-
-  <h1>CryptoRadar LIVE v1.4</h1>
-
-  <div class="section">
-    <h2>📊 Prezzo BTC</h2>
-    <div id="btc-price">Caricamento...</div>
-  </div>
-
-  <div class="section">
-    <h2>📍 Supporti e Resistenze (TF: 4H / 1D)</h2>
-    <div id="support-resistance">Caricamento...</div>
-  </div>
-
-  <div class="section">
-    <h2>🐋 Whale Alert Aggregato</h2>
-    <div id="whale-alert">Caricamento...</div>
-  </div>
-
-  <div class="section">
-    <h2>🔥 Cluster di Liquidità (CoinGlass)</h2>
-    <div id="cluster-liquidity">Caricamento...</div>
-  </div>
-
-  <div class="section">
-    <h2>📰 News Crypto</h2>
-    <ul>
-      <li>📢 ETF BTC in aumento – CoinDesk</li>
-      <li>📢 Aumento hash rate – Cointelegraph</li>
-    </ul>
-  </div>
+  <h1>📊 CryptoRadar LIVE v1.6</h1>
+  <p>✔️ Whale Alerts | ✔️ Pattern LIVE | ✔️ Cluster | ✔️ Resistenze | ✔️ Alert Manuale</p>
+  <p>Status: LIVE ✅</p>
+  <div id="data">Caricamento dati in corso...</div>
+  <script src="script.js"></script>
 </body>
 </html>
