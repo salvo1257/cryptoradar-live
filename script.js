@@ -1,1 +1,0 @@
-// Simulazione logica JS per pattern, whale alert, cluster, ecc.
