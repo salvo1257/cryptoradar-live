@@ -1,36 +1,48 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CryptoRadar</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoRadar</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="app" class="app-container">
-    <header class="app-header">
-      <div class="app-title">
-        <h1>CryptoRadar</h1>
-      </div>
-      <div class="connection-status">
-        <span id="status-indicator" class="status-online">LIVE ✅</span>
-      </div>
-    </header>
-    <main id="app-content" class="app-content">
-    </main>
-    <footer class="app-footer">
-      <div class="connection-info">
-        <div id="connection-status">Connesso - Dati in tempo reale</div>
-        <div id="last-status-time"></div>
-      </div>
-      <div>© <span id="current-year"></span> CryptoRadar</div>
-    </footer>
-    <button id="menu-toggle" class="mobile-menu-toggle">☰</button>
-    <audio id="alert-sound-1" src="https://www.soundjay.com/button/sounds/beep-07.mp3"></audio>
-    <audio id="alert-sound-2" src="https://www.soundjay.com/button/sounds/beep-09.mp3"></audio>
-    <audio id="alert-sound-3" src="https://www.soundjay.com/button/sounds/beep-05.mp3"></audio>
-    <audio id="alert-sound-4" src="https://www.soundjay.com/button/sounds/beep-08.mp3"></audio>
-  </div>
-  <script src="script.js"></script>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="app-title">
+                <h1>CryptoRadar</h1>
+                <div class="connection-status">
+                    <span id="status-indicator" class="status-online">LIVE ✅</span>
+                </div>
+            </div>
+            <button class="mobile-menu-toggle" id="menu-toggle">☰</button>
+        </header>
+        <div class="main-container">
+            <nav class="app-nav" id="app-nav">
+                <ul>
+                    <li class="active" data-section="dashboard"><button><span class="nav-icon">📊</span><span class="nav-label">Dashboard</span></button></li>
+                    <li data-section="whale-alerts"><button><span class="nav-icon">🔔</span><span class="nav-label">Whale Alerts</span></button></li>
+                    <li data-section="liquidity"><button><span class="nav-icon">🧠</span><span class="nav-label">Cluster di Liquidità</span></button></li>
+                    <li data-section="support-resistance"><button><span class="nav-icon">📈</span><span class="nav-label">Supporti e Resistenze</span></button></li>
+                    <li data-section="patterns"><button><span class="nav-icon">🧩</span><span class="nav-label">Pattern Grafici</span></button></li>
+                    <li data-section="alerts"><button><span class="nav-icon">🛎️</span><span class="nav-label">Alert</span></button></li>
+                </ul>
+            </nav>
+            <main class="app-content" id="app-content">
+                <!-- Dynamic content will be loaded here by JavaScript -->
+            </main>
+        </div>
+        <footer class="app-footer">
+            <div class="connection-info">
+                <span id="connection-status">Connesso - Dati in tempo reale</span>
+                <span class="last-status-change" id="last-status-time">Ultimo cambio di stato: 00:00:00</span>
+            </div>
+            <div class="app-copyright">
+                CryptoRadar © <span id="current-year"></span> - App Personale
+            </div>
+        </footer>
+    </div>
+    <script src="config.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
