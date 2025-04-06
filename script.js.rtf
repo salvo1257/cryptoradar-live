@@ -1,0 +1,178 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2821
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 // Inizializza l'app\
+document.addEventListener('DOMContentLoaded', function() \{\
+  initApp();\
+\});\
+\
+// Variabili globali\
+let isOnline = navigator.onLine;\
+let currentPrice = 0;\
+let currentSection = 'dashboard';\
+\
+// Avvio applicazione\
+function initApp() \{\
+  document.getElementById('current-year').textContent = new Date().getFullYear();\
+  \
+  if (!navigator.onLine) \{\
+    loadSavedData();\
+  \}\
+  \
+  loadSection('dashboard');\
+  setupEventListeners();\
+  updateData();\
+  setInterval(updateData, CONFIG.REFRESH_INTERVAL);\
+\}\
+\
+// Setup eventi\
+function setupEventListeners() \{\
+  const navItems = document.querySelectorAll('.app-nav li');\
+  navItems.forEach(item => \{\
+    item.addEventListener('click', function() \{\
+      const section = this.getAttribute('data-section');\
+      loadSection(section);\
+      navItems.forEach(i => i.classList.remove('active'));\
+      this.classList.add('active');\
+      document.body.classList.remove('menu-open');\
+    \});\
+  \});\
+\
+  document.getElementById('menu-toggle').addEventListener('click', function() \{\
+    document.getElementById('app-nav').classList.toggle('show');\
+  \});\
+\
+  window.addEventListener('online', handleConnectionChange);\
+  window.addEventListener('offline', handleConnectionChange);\
+\}\
+\
+// Gestione cambio stato connessione\
+function handleConnectionChange() \{\
+  isOnline = navigator.onLine;\
+  document.getElementById('status-indicator').textContent = isOnline ? 'LIVE \uc0\u9989 ' : 'OFFLINE \u55357 \u56628 ';\
+  document.getElementById('connection-status').textContent = isOnline ? 'Connesso' : 'Offline';\
+  document.getElementById('last-status-time').textContent = new Date().toLocaleTimeString();\
+  \
+  if (isOnline) \{\
+    updateData();\
+  \}\
+\}\
+\
+// Carica sezione dinamica\
+async function loadSection(section) \{\
+  currentSection = section;\
+  const content = document.getElementById('app-content');\
+  content.innerHTML = `<p>Caricamento $\{section\}...</p>`;\
+  \
+  switch(section) \{\
+    case 'dashboard':\
+      content.innerHTML = await generateDashboardHTML();\
+      break;\
+    case 'whale-alerts':\
+      content.innerHTML = await generateWhaleAlertsHTML();\
+      break;\
+    case 'liquidity':\
+      content.innerHTML = await generateLiquidityHTML();\
+      break;\
+    case 'support-resistance':\
+      content.innerHTML = await generateSupportResistanceHTML();\
+      break;\
+    case 'patterns':\
+      content.innerHTML = await generatePatternRecognitionHTML();\
+      break;\
+    case 'alerts':\
+      content.innerHTML = generateAlertHTML();\
+      break;\
+    default:\
+      content.innerHTML = `<p>Sezione non trovata.</p>`;\
+  \}\
+\}\
+\
+// Aggiorna dati principali\
+async function updateData() \{\
+  if (!isOnline) return;\
+\
+  try \{\
+    const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');\
+    const data = await res.json();\
+    currentPrice = data.bitcoin.usd;\
+    localStorage.setItem('btcPrice', currentPrice);\
+    localStorage.setItem('btcPriceTime', new Date().toISOString());\
+    loadSection(currentSection);\
+  \} catch (err) \{\
+    console.error('Errore aggiornamento prezzo BTC', err);\
+  \}\
+\}\
+\
+// Carica dati salvati offline\
+function loadSavedData() \{\
+  const price = localStorage.getItem('btcPrice');\
+  if (price) \{\
+    currentPrice = parseFloat(price);\
+    const time = localStorage.getItem('btcPriceTime');\
+    document.getElementById('last-status-time').textContent = `Ultimo aggiornamento: $\{new Date(time).toLocaleTimeString()\}`;\
+  \}\
+\}\
+\
+// ------- Qui sotto ti inserisco anche le funzioni di generazione HTML base -------\
+// (Per esempio generateDashboardHTML, generateWhaleAlertsHTML, ecc.)\
+\
+// Funzione Placeholder per il momento\
+async function generateDashboardHTML() \{\
+  return `\
+    <div>\
+      <h2>Dashboard</h2>\
+      <p>Prezzo BTC: $$\{currentPrice\}</p>\
+    </div>\
+  `;\
+\}\
+\
+async function generateWhaleAlertsHTML() \{\
+  return `\
+    <div>\
+      <h2>Whale Alerts</h2>\
+      <p>Sezione Whale Alert pronta!</p>\
+    </div>\
+  `;\
+\}\
+\
+async function generateLiquidityHTML() \{\
+  return `\
+    <div>\
+      <h2>Cluster di Liquidit\'e0</h2>\
+      <p>Sezione Liquidity pronta!</p>\
+    </div>\
+  `;\
+\}\
+\
+async function generateSupportResistanceHTML() \{\
+  return `\
+    <div>\
+      <h2>Supporti e Resistenze</h2>\
+      <p>Sezione Support/Resistance pronta!</p>\
+    </div>\
+  `;\
+\}\
+\
+async function generatePatternRecognitionHTML() \{\
+  return `\
+    <div>\
+      <h2>Riconoscimento Pattern</h2>\
+      <p>Sezione Pattern pronta!</p>\
+    </div>\
+  `;\
+\}\
+\
+function generateAlertHTML() \{\
+  return `\
+    <div>\
+      <h2>Alert Manuali</h2>\
+      <p>Sezione Alert pronta!</p>\
+    </div>\
+  `;\
+\}\
+}
