@@ -1,0 +1,7 @@
+// Configurazione delle API
+const CONFIG = {
+    WHALE_ALERT_API_KEY: "lkvcIzoP3Kg5L3z5dvHLhe8SgDYX4yIu",
+    COINGLASS_API_KEY: "7ae1f72585ee474bab755ab410cb2e7a",
+    REFRESH_INTERVAL: 60000,
+    MINIMUM_BTC_AMOUNT: 10
+};
